@@ -16,7 +16,7 @@ class TopicObserver
 
     public function updating(Topic $topic)
     {
-        $this->saving();
+
     }
 
     public function saving(Topic $topic)
