@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Topic extends Model
 {
-    protected $fillable = ['title', 'body', 'user_id', 'category_id', 'reply_count', 'view_count', 'last_reply_user_id', 'order', 'excerpt', 'slug'];
+    protected $fillable = ['title', 'body', 'category_id', 'excerpt', 'slug'];
 
     public function category()
     {
@@ -19,7 +19,7 @@ class Topic extends Model
 
     public function scopeWithOrder($query, $order)
     {
-        switch ($order){
+        switch ($order) {
             case 'recent':
                 $query->recent();
                 break;
@@ -28,7 +28,7 @@ class Topic extends Model
                 $query->recentReplied();
         }
         // 预加载防止 N+1 问题
-        return $query->with('user','category');
+        return $query->with('user', 'category');
     }
 
     public function scopeRecentReplied($query)
@@ -40,6 +40,6 @@ class Topic extends Model
 
     public function scopeRecent($query)
     {
-        return $query->orderBy('created_at','desc');
+        return $query->orderBy('created_at', 'desc');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Topic;
 use App\Models\User;
 
 // creating, created, updating, updated, saving,
@@ -17,5 +18,10 @@ class UserObserver
     public function updating(User $user)
     {
         //
+    }
+
+    public function saving(Topic $topic)
+    {
+        $topic->excerpt = make_excerpt($topic->body);
     }
 }
