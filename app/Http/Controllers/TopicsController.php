@@ -23,7 +23,7 @@ class TopicsController extends Controller
         return view('topics.index', compact('topics'));
     }
 
-    public function show(Topic $topic)
+    public function show(Request $request,Topic $topic)
     {
         // URL 矫正
         if (!empty($topic->slug) && $topic->slug != $request->slug) {
@@ -47,7 +47,7 @@ class TopicsController extends Controller
         $topic->save();
 
         //return redirect()->route('topics.show', $topic->id)->with('success', '帖子创建成功！');
-        return redirect()->to($topic->link(), $topic->id)->with('success', '帖子创建成功！');
+        return redirect()->to($topic->link())->with('success', '帖子创建成功！');
     }
 
     public function uploadImage(Request $request, ImageUploadHandler $uploader)
