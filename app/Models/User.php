@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Auth\MustVerifyEmail  as MustVerifyEmailTrait;
+use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class User extends Authenticatable implements MustVerifyEmailContract
 {
     use MustVerifyEmailTrait;
-    use Notifiable{
+    use Notifiable {
         notify as protected laravelNotify;
     }
 
@@ -21,7 +21,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','introduction','avatar'
+        'name', 'email', 'password', 'introduction', 'avatar'
     ];
 
     /**
@@ -77,5 +77,10 @@ class User extends Authenticatable implements MustVerifyEmailContract
         $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
+    }
+
+    public function isAuthorOf($model)
+    {
+        return $this->id == $model->user_id;
     }
 }
