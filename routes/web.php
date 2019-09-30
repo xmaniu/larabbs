@@ -1,6 +1,6 @@
 <?php
 
-route::get('/', 'PagesController@root')->name('root');
+route::get('/', 'TopicsController@index')->name('root');
 //Auth::routes();
 // 用户身份验证相关的路由
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
